@@ -73,6 +73,19 @@
   function toggle(i) {
     openIndex = openIndex === i ? null : i;
   }
+
+  let selectedLang = 'en';
+  function selectLang(code, event) {
+    if (event) event.preventDefault();
+    selectedLang = code;
+  }
+
+  const languages = [
+    { code: 'en', name: 'English', icon: UsFlag },
+    { code: 'es', name: 'Espanol', icon: SpainFlag },
+    { code: 'de', name: 'Deutsch', icon: GermanyFlag },
+    { code: 'pt', name: 'Português', icon: BrazilFlag }
+  ];
 </script>
 
 
@@ -94,30 +107,20 @@
       <div class="lang-before mt-10">
         <div class=" flex gap-[4px] text-sm font-medium text-[#707070]"> <img src={LangIcon} alt="English" class="max-w-[20px] text-[#707070]" /> Languages</div>
         <ul class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
-          <li>
-            <a href="#" class="flex items-center gap-[8px] selected-lang pb-[4px]">
-              <img src={UsFlag} alt="English" class="max-w-[16px]" />
-              English
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-              <img src={SpainFlag} alt="Espanol" class="max-w-[16px]" />
-              Espanol
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-              <img src={GermanyFlag} alt="Deutsch" class="max-w-[16px]" />
-              Deutsch
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-              <img src={BrazilFlag} alt="Português" class="max-w-[16px]" />
-              Português
-            </a>
-          </li>
+          {#each languages as lang (lang.code)}
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-[8px] pb-[4px]"
+                class:selected-lang={selectedLang === lang.code}
+                on:click={(e) => { e.preventDefault(); selectLang(lang.code); }}
+                aria-current={selectedLang === lang.code ? 'true' : undefined}
+              >
+                <img src={lang.icon} alt={lang.name} class="max-w-[16px]" />
+                {lang.name}
+              </a>
+            </li>
+          {/each}
         </ul>
       </div>
     </div>
@@ -182,30 +185,20 @@
         <img src={LangIcon} alt="Languages" class="max-w-[20px] text-[#707070]" /> Languages
       </div>
       <ul class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
-        <li>
-          <a href="#" class="flex items-center gap-[8px] selected-lang pb-[4px]">
-            <img src={UsFlag} alt="English" class="max-w-[16px]" />
-            English
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-            <img src={SpainFlag} alt="Espanol" class="max-w-[16px]" />
-            Espanol
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-            <img src={GermanyFlag} alt="Deutsch" class="max-w-[16px]" />
-            Deutsch
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center gap-[8px] pb-[4px]">
-            <img src={BrazilFlag} alt="Português" class="max-w-[16px]" />
-            Português
-          </a>
-        </li>
+        {#each languages as lang (lang.code)}
+          <li>
+            <a
+              href="#"
+              class="flex items-center gap-[8px] pb-[4px]"
+              class:selected-lang={selectedLang === lang.code}
+              on:click={(e) => { e.preventDefault(); selectLang(lang.code); }}
+              aria-current={selectedLang === lang.code ? 'true' : undefined}
+            >
+              <img src={lang.icon} alt={lang.name} class="max-w-[16px]" />
+              {lang.name}
+            </a>
+          </li>
+        {/each}
       </ul>
     </div>
   </div>
