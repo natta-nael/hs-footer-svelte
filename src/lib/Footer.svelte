@@ -11,7 +11,7 @@
   import Tw from "../assets/svg/sm-tw.svg";
   import Yt from "../assets/svg/sm-yt.svg";
 
-  const LinkCol01 = [
+  const LinkCol = [
     {
       title: "Products",
       links: [
@@ -31,9 +31,7 @@
         { name: "API Access", url: "#" },
         { name: "In-Store Music", url: "#" }
       ]
-    }
-  ];
-  const LinkCol02 = [
+    },
     {
       title: "For Business",
       links: [
@@ -53,9 +51,7 @@
         { name: "Music for Podcasts", url: "#" },
         { name: "Music for Documentaries", url: "#" }
       ]
-    }
-  ];
-  const LinkCol03 = [
+    },
     {
       title: "Plans & Programs",
       links: [
@@ -119,42 +115,9 @@
 
     <!-- Right Column -->
     <div class="footer-right flex gap-[60px]">
-      <!-- Link columns 01 -->
-       <div class="flex flex-col w-full  gap-[44px]">
-      {#each LinkCol01 as linkgroup}
-        <div class="w-full">
-          <h4 class="text-sm font-semibold text-[#D6D6D6] text-left mb-[12px]">{linkgroup.title}</h4>
-          <ul class="flex flex-col gap-[12px] text-sm text-neutral-400">
-            {#each linkgroup.links as link}
-              <li>
-                <a class="whitespace-nowrap" href={link.url}>{link.name}</a>
-              </li>
-            {/each}
-          </ul>
-        </div>
-      {/each}
-    </div>
-
-    <!-- Link columns 02 -->
-       <div class="flex flex-col w-full gap-[44px]">
-      {#each LinkCol02 as linkgroup}
-        <div class="w-full">
-          <h4 class="text-sm font-semibold text-[#D6D6D6] text-left mb-[12px]">{linkgroup.title}</h4>
-          <ul class="flex flex-col gap-[12px] text-sm text-neutral-400">
-            {#each linkgroup.links as link}
-              <li>
-                <a class="whitespace-nowrap" href={link.url}>{link.name}</a>
-              </li>
-            {/each}
-          </ul>
-        </div>
-      {/each}
-    </div>
-
-    <!-- Link columns 03 -->
-       <div class="flex flex-col w-full gap-[44px]">
-      {#each LinkCol03 as linkgroup}
-        <div class="w-full">
+       <div class="flex flex-col flex-wrap h-[404px] gap-y-[44px]">
+      {#each LinkCol as linkgroup}
+        <div class="w-[200px]">
           <h4 class="text-sm font-semibold text-[#D6D6D6] text-left mb-[12px]">{linkgroup.title}</h4>
           <ul class="flex flex-col gap-[12px] text-sm text-neutral-400">
             {#each linkgroup.links as link}
@@ -203,7 +166,7 @@
   }
 
   /* Middle breakpoint: stack upper section columns */
-  @media (min-width: 768px) and (max-width: 1024px) {
+  @media (min-width: 600px) and (max-width: 1024px) {
     .footer-top {
       flex-direction: column;
       gap: 40px;
@@ -214,7 +177,7 @@
   }
   
   /* Optional small screens: also stack and reduce padding */
-  @media (max-width: 767.98px) {
+  @media (max-width: 600px) {
     .footer-top {
       flex-direction: column;
       gap: 32px;
@@ -224,6 +187,7 @@
       padding-bottom: 32px;
     }
     .footer-right {
+      flex-direction: column;
       width: 100%;
       gap: 32px;
     }
