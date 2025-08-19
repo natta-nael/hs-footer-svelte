@@ -99,15 +99,15 @@
       <div class="flex flex-col">
         <img src={HsLogo} alt="HookSounds logo" class="hs-logo max-w-[315px]" />
 
-      <p class="mt-[16px] text-sm leading-[24px] text-[#707070]">
+      <p class="mt-[16px] text-sm leading-[24px] text-[#7E7E7E]">
         Original music. Worry-free licensing. Tools that speed you up. HookSounds gives you royalty-free tracks, SFX, and intros — made in-house — so you can tell better stories with sound, fast.
       </p>
       </div>
 
       <!-- Languages (desktop) -->
       <div class="lang-before mt-10">
-        <div class=" flex gap-[4px] text-sm font-medium text-[#707070]"> <img src={LangIcon} alt="English" class="max-w-[20px] text-[#707070]" /> Languages</div>
-        <ul class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
+        <div class=" flex gap-[4px] text-sm font-medium text-[#7E7E7E]"> <img src={LangIcon} alt="English" class="max-w-[20px] text-[#707070]" /> Languages</div>
+        <ul class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#7E7E7E]">
           {#each languages as lang (lang.code)}
             <li>
               <a
@@ -133,7 +133,7 @@
       {#each LinkCol as linkgroup}
         <div>
           <h4 class="text-sm font-semibold text-[#D6D6D6] text-left mb-[12px]">{linkgroup.title}</h4>
-          <ul class="flex flex-col gap-[12px] text-sm text-neutral-400">
+          <ul class="flex flex-col gap-[12px] text-sm text-[#7E7E7E]">
             {#each linkgroup.links as link}
               <li>
                 <a class="whitespace-nowrap" href={link.url}>{link.name}</a>
