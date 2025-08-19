@@ -64,11 +64,9 @@
     },
   ];
 
-  let open = new Set();
+  let openIndex = null;
   function toggle(i) {
-    if (open.has(i)) open.delete(i);
-    else open.add(i);
-    open = new Set(open);
+    openIndex = openIndex === i ? null : i;
   }
 </script>
 
@@ -145,19 +143,19 @@
         <div class="border-b border-[#222]">
           <button
             class="w-full flex items-center justify-between py-3 text-left"
-            aria-expanded={open.has(i) ? 'true' : 'false'}
+            aria-expanded={openIndex === i ? 'true' : 'false'}
             on:click={() => toggle(i)}
           >
             <span class="text-sm font-semibold text-[#D6D6D6]">{group.title}</span>
             <svg
               class="size-4 transition-transform"
-              style={`transform: rotate(${open.has(i) ? 180 : 0}deg);`}
+              style={`transform: rotate(${openIndex === i ? 180 : 0}deg);`}
               viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
             >
               <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.2l3.71-2.97a.75.75 0 01.94 1.17l-4.24 3.4a.75.75 0 01-.94 0l-4.24-3.4a.75.75 0 01.02-1.19z"/>
             </svg>
           </button>
-          {#if open.has(i)}
+          {#if openIndex === i}
             <ul class="pb-2">
               {#each group.links as link}
                 <li>
