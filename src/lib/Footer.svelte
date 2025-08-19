@@ -83,7 +83,7 @@
     <div class="left-col flex flex-col justify-between w-full max-w-[420px]">
       <!-- Logo and Description -->
       <div class="flex flex-col">
-        <img src={HsLogo} alt="HookSounds logo" class="max-w-[315px]" />
+        <img src={HsLogo} alt="HookSounds logo" class="hs-logo max-w-[315px]" />
 
       <p class="mt-[16px] text-sm leading-[24px] text-[#707070]">
         Original music. Worry-free licensing. Tools that speed you up. HookSounds gives you royalty-free tracks, SFX, and intros — made in-house — so you can tell better stories with sound, fast.
@@ -267,6 +267,11 @@
       gap: 32px;
       padding-top: 24px;
     }
+
+    .hs-logo {
+      width: 258px;
+    }
+
     /* Show desktop links, hide accordion; keep desktop languages */
     .right-desktop { display: block; }
     .right-mobile  { display: none; }
@@ -291,6 +296,10 @@
       width: 100%;
       gap: 32px;
       padding-top: 24px;
+    }
+
+    .hs-logo {
+      width: 200px;
     }
 
     .mobile-brk {
