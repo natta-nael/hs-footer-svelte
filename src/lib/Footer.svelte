@@ -63,6 +63,13 @@
       ]
     },
   ];
+
+  let open = new Set();
+  function toggle(i) {
+    if (open.has(i)) open.delete(i);
+    else open.add(i);
+    open = new Set(open);
+  }
 </script>
 
 
@@ -81,7 +88,7 @@
       </div>
 
       <!-- Languages (desktop) -->
-      <div class="lang-desktop mt-10">
+      <div class="lang-before mt-10">
         <div class=" flex gap-[4px] text-sm font-medium text-[#707070]"> <img src={LangIcon} alt="English" class="max-w-[20px] text-[#707070]" /> Languages</div>
         <ul class="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
           <li>
@@ -113,8 +120,8 @@
     </div>
 
 
-    <!-- Right Column -->
-    <div class="footer-right flex gap-[60px]">
+    <!-- Right Column - desktop -->
+    <div class="footer-right right-desktop flex gap-[60px]">
        <div class="flex flex-col flex-wrap h-[440px] gap-y-[44px] gap-x-[60px]">
       {#each LinkCol as linkgroup}
         <div>
@@ -132,8 +139,44 @@
 
     </div>
 
-    <!-- Languages (mobile) shown under right column -->
-    <div class="lang-mobile mt-6">
+    <!-- Right Column - mobile accordion -->
+    <div class="right-mobile mt-4">
+      {#each LinkCol as group, i}
+        <div class="border-b border-[#222]">
+          <button
+            class="w-full flex items-center justify-between py-3 text-left"
+            aria-expanded={open.has(i) ? 'true' : 'false'}
+            on:click={() => toggle(i)}
+          >
+            <span class="text-sm font-semibold text-[#D6D6D6]">{group.title}</span>
+            <svg
+              class="size-4 transition-transform"
+              style={`transform: rotate(${open.has(i) ? 180 : 0}deg);`}
+              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+            >
+              <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.2l3.71-2.97a.75.75 0 01.94 1.17l-4.24 3.4a.75.75 0 01-.94 0l-4.24-3.4a.75.75 0 01.02-1.19z"/>
+            </svg>
+          </button>
+          {#if open.has(i)}
+            <ul class="pb-2">
+              {#each group.links as link}
+                <li>
+                  <a
+                    href={link.url}
+                    class="block whitespace-nowrap text-[14px] leading-[40px] text-[#707070] hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+        </div>
+      {/each}
+    </div>
+
+    <!-- Languages (after) shown under right column -->
+    <div class="lang-after mt-6">
       <div class=" flex gap-[4px] text-sm font-medium text-[#707070]">
         <img src={LangIcon} alt="Languages" class="max-w-[20px] text-[#707070]" /> Languages
       </div>
@@ -198,35 +241,59 @@
     border-bottom: 1px solid white;
   }
 
-  .lang-mobile { display: none; }
+  .lang-after { display: none; }
+  .right-mobile { display: none; }
+  .right-desktop { display: block; }
+  .lang-before { display: block; }
 
-  @media (max-width: 1024px) {
+  /* Medium: 601px - 1024px */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    /* Stack the top section, but keep normal link columns (no accordion) */
     .footer-top {
       flex-direction: column;
       gap: 32px;
       padding-left: 16px;
       padding-right: 16px;
     }
-
     .bottom-panel {
       padding-left: 16px;
       padding-right: 16px;
     }
-
     .footer-right {
       flex-direction: column;
       width: 100%;
       gap: 32px;
       padding-top: 24px;
     }
+    /* Show desktop links, hide accordion; keep desktop languages */
+    .right-desktop { display: block; }
+    .right-mobile  { display: none; }
+    .lang-before  { display: none; }
+    .lang-after   { display: block; }
+  }
 
-    .lang-mobile { 
-      display: block; 
-      padding-left: 16px; 
-      padding-right: 16px; 
+  /* Small: ≤600px - accordion only */
+  @media (max-width: 600px) {
+    .footer-top {
+      flex-direction: column;
+      gap: 32px;
+      padding-left: 16px;
+      padding-right: 16px;
     }
-    .lang-desktop { 
-      display: none; 
+    .bottom-panel {
+      padding-left: 16px;
+      padding-right: 16px;
     }
+    .footer-right {
+      flex-direction: column;
+      width: 100%;
+      gap: 32px;
+      padding-top: 24px;
+    }
+    /* Hide desktop links, show accordion; move languages under right column */
+    .right-desktop { display: none; }
+    .right-mobile  { display: block;}
+    .lang-before  { display: none; }
+    .lang-after   { display: block;}
   }
 </style>
