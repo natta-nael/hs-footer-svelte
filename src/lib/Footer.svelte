@@ -17,6 +17,7 @@
   import { cubicOut } from 'svelte/easing';
 
   const LinkCol = [
+    // Add in the urls to the links here
     {
       title: "Products",
       links: [
@@ -81,10 +82,10 @@
   }
 
   const languages = [
-    { code: 'en', name: 'English', icon: UsFlag },
-    { code: 'es', name: 'Espanol', icon: SpainFlag },
-    { code: 'de', name: 'Deutsch', icon: GermanyFlag },
-    { code: 'pt', name: 'Português', icon: BrazilFlag }
+    { code: 'en', name: 'English', icon: UsFlag, url: '#' },
+    { code: 'es', name: 'Espanol', icon: SpainFlag, url: '#' },
+    { code: 'de', name: 'Deutsch', icon: GermanyFlag, url: '#' },
+    { code: 'pt', name: 'Português', icon: BrazilFlag, url: '#' }
   ];
 </script>
 
@@ -110,10 +111,10 @@
           {#each languages as lang (lang.code)}
             <li>
               <a
-                href="#"
+                href={lang.url}
                 class="flex items-center gap-[8px] pb-[4px]"
                 class:selected-lang={selectedLang === lang.code}
-                on:click={(e) => { e.preventDefault(); selectLang(lang.code); }}
+                on:click={(e) =>  selectLang(lang.code) }
                 aria-current={selectedLang === lang.code ? 'true' : undefined}
               >
                 <img src={lang.icon} alt={lang.name} class="max-w-[16px]" />
@@ -188,10 +189,10 @@
         {#each languages as lang (lang.code)}
           <li>
             <a
-              href="#"
+              href={lang.url}
               class="flex items-center gap-[8px] pb-[4px]"
               class:selected-lang={selectedLang === lang.code}
-              on:click={(e) => { e.preventDefault(); selectLang(lang.code); }}
+              on:click={(e) =>  selectLang(lang.code) }
               aria-current={selectedLang === lang.code ? 'true' : undefined}
             >
               <img src={lang.icon} alt={lang.name} class="max-w-[16px]" />

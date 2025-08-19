@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #ececec;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,7 +25,8 @@ body {
 }
 
 #app {
-  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: 0;
 }
 
 @media (prefers-color-scheme: light) {
