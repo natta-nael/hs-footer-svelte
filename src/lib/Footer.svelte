@@ -10,6 +10,11 @@
   import Ig from "../assets/svg/sm-ig.svg";
   import Tw from "../assets/svg/sm-tw.svg";
   import Yt from "../assets/svg/sm-yt.svg";
+  import ChevronUp from "../assets/svg/Chevron--up.svg";
+  import ChevronDown from "../assets/svg/Chevron--down.svg";
+
+  import { slide } from 'svelte/transition';
+  import { cubicOut } from 'svelte/easing';
 
   const LinkCol = [
     {
@@ -138,25 +143,23 @@
     </div>
 
     <!-- Right Column - mobile accordion -->
-    <div class="right-mobile mt-4">
+    <div class="right-mobile">
       {#each LinkCol as group, i}
-        <div class="border-b border-[#222]">
+        <div class="border-b border-[#222] py-2">
           <button
             class="w-full flex items-center justify-between py-3 text-left"
             aria-expanded={openIndex === i ? 'true' : 'false'}
             on:click={() => toggle(i)}
           >
             <span class="text-sm font-semibold text-[#D6D6D6]">{group.title}</span>
-            <svg
-              class="size-4 transition-transform"
-              style={`transform: rotate(${openIndex === i ? 180 : 0}deg);`}
-              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
-            >
-              <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.2l3.71-2.97a.75.75 0 01.94 1.17l-4.24 3.4a.75.75 0 01-.94 0l-4.24-3.4a.75.75 0 01.02-1.19z"/>
-            </svg>
+            {#if openIndex === i}
+              <img src={ChevronUp} alt="Collapse" class="max-w-[20px]" />
+            {:else}
+              <img src={ChevronDown} alt="Expand" class="max-w-[20px]" />
+            {/if}
           </button>
           {#if openIndex === i}
-            <ul class="pb-2">
+            <ul class="pb-2" transition:slide={{ duration: 250, easing: cubicOut }}>
               {#each group.links as link}
                 <li>
                   <a
@@ -174,7 +177,7 @@
     </div>
 
     <!-- Languages (after) shown under right column -->
-    <div class="lang-after mt-6">
+    <div class="lang-after mt-2">
       <div class=" flex gap-[4px] text-sm font-medium text-[#707070]">
         <img src={LangIcon} alt="Languages" class="max-w-[20px] text-[#707070]" /> Languages
       </div>
@@ -210,8 +213,8 @@
   <!-- bottom -->
   <div class=" bg-[#1A1A1A] w-full py-[12px]">
     <div class="bottom-panel flex justify-between max-w-[1360px] px-[40px] mx-auto items-center">
-      <p class="text-xs text-[#707070]">Copyright © 2025 HookSounds - Royalty Free Music</p>
-      <div class="flex items-center gap-4 text-neutral-400">
+      <p class="mobile-copyright text-xs font-[500] text-[#707070]">Copyright © 2025 HookSounds - Royalty Free Music</p>
+      <div class="mobile-brk flex items-center gap-4 text-neutral-400">
         <img src={Yt} alt="YouTube" class="text-[32px]" />
         <img src={Ig} alt="Instagram" class="text-[32px]" />
         <img src={Tw} alt="Twitter" class="text-[32px]" />
@@ -224,6 +227,7 @@
 <style>
   li {
     font-size: 14px;
+    font-weight: 500;
     line-height: 20px;
     text-align: left;
     color: #707070;
@@ -288,6 +292,15 @@
       gap: 32px;
       padding-top: 24px;
     }
+
+    .mobile-brk {
+      gap: 4px;
+    }
+
+    .mobile-copyright {
+      width: 174px;
+    }
+
     /* Hide desktop links, show accordion; move languages under right column */
     .right-desktop { display: none; }
     .right-mobile  { display: block;}
