@@ -81,6 +81,7 @@
     selectedLang = code;
   }
 
+  // I'm not sure if we are using routing for this, just used the plain old url since i noticed /es on the website to change the language
   const languages = [
     { code: 'en', name: 'English', icon: UsFlag, url: '#' },
     { code: 'es', name: 'Espanol', icon: SpainFlag, url: '#' },
