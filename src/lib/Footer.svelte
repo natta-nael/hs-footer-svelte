@@ -77,7 +77,6 @@
 
   let selectedLang = 'en';
   function selectLang(code, event) {
-    if (event) event.preventDefault();
     selectedLang = code;
   }
 
